@@ -1,102 +1,201 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home | VishuBanotra</title>
+    <meta
+      name="description"
+      content="Portfolio of Vishu Vishal Banotra, a full-stack developer working with React, Next.js, Node.js, PostgreSQL, and MongoDB."
+    />
+    <title>Vishu Vishal Banotra | Full-stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
     <link rel="stylesheet" href="/style.css" />
+    <script
+      src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"
+      defer
+    ></script>
+    <script src="/portfolioData.js" defer></script>
+    <script src="/app.js" defer></script>
   </head>
   <body>
-    
-    <nav class="navigation container">
-      <div class="nav-brand"><a href="/index.html">Vishu Banotra</a></div>
-      <ul class="list-non-bullet list-right">
-        <li class="list-items">
-          <a class="link link-active" href="">Home</a>
-        </li>
-        <li class="list-items">
-          <a class="link" href="/projects.html">Projects</a>
-        </li>
-        <li class="list-items">
-          <a class="link" href="/blogs.html">Blogs</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="page-noise" aria-hidden="true"></div>
+    <div class="ambient-field" aria-hidden="true">
+      <span class="field-shape shape-one"></span>
+      <span class="field-shape shape-two"></span>
+    </div>
 
-    <header>
-      <img src="/Images/main.svg" alt="logo." />
-      <h1 class="hero-text">Vishu Banotra, The <span>Web Developer</span></h1>
+    <header class="site-header">
+      <a class="brand-mark" href="#top" aria-label="Vishu Vishal Banotra home">
+        <span>VB</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </header>
 
-    <section class="section ow">
-      <div class="container-center">
-        <h1>Technologies</h1>
-        <p>
-          I'm familiar with HTML5, CSS3, Git, Javascript,
-          and Web Hosting.
-        </p>
-      </div>
-    </section>
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Full-stack Developer</p>
+          <h1>Vishu Vishal Banotra</h1>
+          <!-- <p class="hero-intro">
+            Full-stack developer with 2 years of experience building modern web
+            applications using React, Next.js, Node.js and TypeScript. I enjoy
+            building reliable backend systems, intuitive user interfaces and
+            scalable products.
+          </p> -->
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button button-primary" href="#projects">
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+              View work
+            </a>
+            <a class="button button-secondary" href="#contact">
+              <i data-lucide="send" aria-hidden="true"></i>
+              Get in touch
+            </a>
+          </div>
+        </div>
 
-    <section class="section">
-      <div class="container-center">
-        <h1>Projects</h1>
-        <p>
-          I like to showcase my work thus, you can see my projects hosted
-          online.
-        </p>
-      </div>
-      <a class="link-button" href="/projects.html">See Projects</a>
-    </section>
+        <aside class="hero-panel reveal" aria-label="Currently Building">
+          <div class="availability">Currently Building</div>
 
-    <section class="section ow">
-      <div class="container-center">
-        <h1>Blogs</h1>
-        <p class="content">
-          I am also working on some technical and non-technical blogs. I like to
-          document my journey of learning.
-        </p>
-      </div>
-      <a class="link-button" href="/blogs.html">Read Blogs</a>
-    </section>
+          <div class="signature-card">
+            <span class="signature-kicker">Side Project</span>
+            <strong>TaskFlow</strong>
 
-    <footer>
-      <div class="footer-header">Social Media Presence</div>
-      <ul class="list-non-bullet">
-        <li class="list-items">
+            <p>
+              A Jira-inspired team collaboration platform with workspaces,
+              Kanban boards, authentication and invitation-based onboarding.
+            </p>
+          </div>
+
+          <dl class="hero-metrics">
+            <div>
+              <dt>Current Focus</dt>
+              <dd>Backend architecture & Clean APIs</dd>
+            </div>
+
+            <div>
+              <dt>Learning</dt>
+              <dd>Redis • BullMQ • System Design</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section id="about" class="section-shell split-section reveal">
+        <div>
+          <p class="section-kicker">About</p>
+          <h2>Full-stack development with a practical focus.</h2>
+        </div>
+        <div class="section-body">
+          <p>
+            I'm a full-stack developer who enjoys building products from
+            frontend to backend. My experience includes authentication systems,
+            workflow automation, REST APIs and collaborative applications. I
+            focus on writing clean, maintainable code and building software that
+            is practical and reliable.
+          </p>
+        </div>
+      </section>
+
+      <section id="skills" class="section-shell reveal">
+        <div class="section-heading">
+          <p class="section-kicker">Skills</p>
+          <h2>Technologies I work with</h2>
+        </div>
+        <div class="skill-grid" id="skillsGrid"></div>
+      </section>
+
+      <section id="experience" class="section-shell reveal">
+        <div class="section-heading">
+          <p class="section-kicker">Experience</p>
+          <h2>Work experience</h2>
+        </div>
+        <div class="timeline" id="experienceTimeline"></div>
+      </section>
+
+      <section id="projects" class="section-shell reveal">
+        <div class="section-heading project-heading">
+          <div>
+            <p class="section-kicker">Projects</p>
+            <h2>Things I've Built</h2>
+          </div>
           <a
-            class="link"
-            href="https://github.com/VishuBanotra"
+            class="text-link"
+            data-profile-link="github"
+            href="https://github.com/vishubanotra98"
             target="_blank"
+            rel="noreferrer"
           >
-            <span><i class="fa-brands fa-github"></i></span> Git</a
-          >
-        </li>
-        <li class="list-items">
+            GitHub profile
+            <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="project-grid" id="projectGrid"></div>
+      </section>
+
+      <section id="contact" class="section-shell contact-section reveal">
+        <div class="contact-copy">
+          <p class="section-kicker">Get in touch</p>
+          <h2>Contact</h2>
+          <p>
+            If you'd like to discuss an opportunity, collaborate on a project,
+            or just connect, feel free to reach out.
+          </p>
+        </div>
+        <div class="contact-card">
+          <a data-profile-link="email" href="mailto:banotravishu89@gmail.com">
+            <i data-lucide="mail" aria-hidden="true"></i>
+            <span data-profile-text="email">banotravishu89@gmail.com</span>
+          </a>
+
           <a
-            class="link"
-            href="https://www.linkedin.com/in/vishu-vishal-banotra-107828160/"
+            data-profile-link="linkedin"
+            href="https://linkedin.com/in/vishu-vishal-banotra-107828160"
             target="_blank"
+            rel="noreferrer"
           >
-            <span><i class="fa-brands fa-linkedin"></i></span> LinkedIn</a
-          >
-        </li>
-        <li class="list-items">
+            <span class="brand-icon">
+              <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+            </span>
+            <span>LinkedIn</span>
+          </a>
+
           <a
-            class="link"
-            href="https://www.instagram.com/vishubanotra/"
+            data-profile-link="github"
+            href="https://github.com/vishubanotra98"
             target="_blank"
+            rel="noreferrer"
           >
-            <span><i class="fa-brands fa-instagram"></i></span> Instagram</a
-          >
-        </li>
-      </ul>
+            <span class="brand-icon">
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </span>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Vishu Vishal Banotra</span>
+      <a href="#top">Back to top</a>
     </footer>
-
-    <script
-      src="https://kit.fontawesome.com/c854ac74a6.js"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>
