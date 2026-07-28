@@ -60,7 +60,9 @@ window.portfolioData = {
         "Resolved critical frontend issues to improve application stability and user experience.",
       ],
       stack: [
-        "React",
+        "React.Js",
+        "Next.Js",
+        "Node.Js",
         "TypeScript",
         "Redux Toolkit",
         "ReactFlow",
@@ -75,7 +77,7 @@ window.portfolioData = {
       type: "Personal Project",
       year: "2026",
       description:
-        "A Jira-inspired team collaboration platform with workspaces, Kanban boards, project management, role-based access control and invitation-based onboarding.",
+        "A team collaboration platform with workspaces, Kanban boards, project management, role-based access control and invitation-based onboarding.",
       highlights: [
         "Built secure authentication using JWT access tokens, refresh tokens and custom Google OAuth 2.0 with HTTP-only cookies.",
         "Implemented invitation-based onboarding using Resend, BullMQ and Redis for asynchronous email processing.",
@@ -92,10 +94,10 @@ window.portfolioData = {
         "BullMQ",
         "Tailwind CSS",
       ],
-      liveUrl: "https://taskflow.vercel.app",
+      liveUrl: "https://taskflow.vishubanotra.xyz",
       repositories: {
-        frontend: "https://github.com/vishubanotra98/taskflow-frontend",
-        backend: "https://github.com/vishubanotra98/taskflow-backend",
+        frontend: "https://github.com/vishubanotra98/taskflow-web",
+        backend: "https://github.com/vishubanotra98/taskflow-rest",
       },
     },
     {
@@ -118,10 +120,10 @@ window.portfolioData = {
         "JWT",
         "Razorpay API",
       ],
-      liveUrl: "https://taskflow.vercel.app",
+      liveUrl: "https://thecakeshopp.vercel.app/",
       repositories: {
-        frontend: "https://github.com/vishubanotra98/taskflow-frontend",
-        backend: "https://github.com/vishubanotra98/taskflow-backend",
+        frontend: "https://github.com/vishubanotra98/TheCakeShop",
+        backend: "https://github.com/vishubanotra98/cakeShop-restApi",
       },
     },
   ],
