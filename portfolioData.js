@@ -73,15 +73,19 @@ window.portfolioData = {
   ],
   projects: [
     {
-      name: "TaskFlow",
+      name: "Subtend",
       type: "Personal Project",
-      year: "2026",
+      year: "2026 - Ongoing",
       description:
-        "A team collaboration platform with workspaces, Kanban boards, project management, role-based access control and invitation-based onboarding.",
+        "A full-stack team collaboration platform built around workspaces, teams, projects and issues, with a focus on access control, asynchronous processing, issue lifecycle management and operational visibility.",
       highlights: [
-        "Built secure authentication using JWT access tokens, refresh tokens and custom Google OAuth 2.0 with HTTP-only cookies.",
-        "Implemented invitation-based onboarding using Resend, BullMQ and Redis for asynchronous email processing.",
-        "Designed REST APIs and relational database models using Express.js, Prisma ORM and PostgreSQL.",
+        "Engineered a hierarchical workspace → team → project → issue architecture with role-based access control, custom status workflows and granular issue management.",
+        "Built a complete authentication system with short-lived JWT access tokens, rotating refresh tokens, HTTP-only cookies and custom Google OAuth 2.0.",
+        "Implemented asynchronous email infrastructure using Redis and BullMQ, handling OTP verification and workspace invitations through background workers with Resend.",
+        "Designed an issue attention engine that scores issues based on status, priority, overdue duration, staleness and assignment state, powering the dashboard's Action Required section.",
+        "Built workspace activity tracking with before/after state snapshots for issue changes, providing an auditable history of status, priority, assignment and content updates.",
+        "Implemented a complete deletion lifecycle for teams and projects with soft deletion, Trash-based recovery, restoration and scheduled permanent purging through background jobs, keeping logical deletion separate from physical data removal.",
+        "Designed relational data models and REST APIs using PostgreSQL, Prisma and Express.js, with authorization enforced across workspace, team and project boundaries.",
       ],
       stack: [
         "Next.js",
@@ -94,10 +98,10 @@ window.portfolioData = {
         "BullMQ",
         "Tailwind CSS",
       ],
-      liveUrl: "https://taskflow.vishubanotra.xyz",
+      liveUrl: "https://subtend.vishubanotra.xyz/",
       repositories: {
-        frontend: "https://github.com/vishubanotra98/taskflow-web",
-        backend: "https://github.com/vishubanotra98/taskflow-rest",
+        frontend: "https://github.com/vishubanotra98/subtend-web",
+        backend: "https://github.com/vishubanotra98/subtend-api",
       },
     },
     {

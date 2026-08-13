@@ -395,6 +395,11 @@ h3 {
   gap: 16px;
 }
 
+.skill-grid,
+.project-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
 .skill-card,
 .project-card {
   min-height: 100%;
@@ -830,4 +835,29 @@ h3 {
 .brand-icon i {
   font-size: 16px;
   line-height: 1;
+}
+
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 920px) {
+  .skill-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
 }
