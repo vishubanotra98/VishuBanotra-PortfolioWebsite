@@ -171,7 +171,7 @@ a {
 .section-shell {
   width: min(calc(100% - 32px), var(--max-width));
   margin: 0 auto;
-  padding: clamp(72px, 10vw, 132px) 0;
+  padding: clamp(72px, 5vw, 132px) 0;
 }
 
 .hero {
@@ -837,7 +837,6 @@ h3 {
   line-height: 1;
 }
 
-
 .skill-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -859,5 +858,62 @@ h3 {
 @media (max-width: 640px) {
   .skill-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.github-contributions {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 40, 35, 0.25) transparent;
+}
+
+.github-contributions::-webkit-scrollbar {
+  height: 4px;
+}
+
+.github-contributions::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.github-contributions::-webkit-scrollbar-thumb {
+  background: rgba(20, 40, 35, 0.25);
+  border-radius: 999px;
+}
+
+.github-contributions::-webkit-scrollbar-thumb:hover {
+  background: rgba(20, 40, 35, 0.45);
+}
+
+.github-contributions img {
+  display: block;
+  width: 100%;
+  max-width: 1080px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.github-section {
+  padding-bottom: 56px;
+}
+
+.github-section .section-heading {
+  margin-bottom: 28px;
+}
+
+.github-section + .section-shell {
+  padding-top: 56px;
+}
+
+@media (max-width: 899px) {
+  .github-contributions {
+    overflow-x: auto;
+  }
+
+  .github-contributions img {
+    margin: 0;
   }
 }
