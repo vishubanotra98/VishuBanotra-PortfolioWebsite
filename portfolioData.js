@@ -54,10 +54,11 @@ window.portfolioData = {
       role: "Software Developer",
       company: "Vodex.ai • Bangalore",
       bullets: [
-        "Rebuilt the legacy application UI using React and Material UI based on updated Figma designs.",
-        "Built a visual workflow automation interface using ReactFlow v11 and Redux Toolkit.",
-        "Implemented a hybrid RSA-AES encryption layer for secure client-server communication.",
-        "Resolved critical frontend issues to improve application stability and user experience.",
+        "Designed and developed the complete UI/UX flow for an AI agentic calling workflow builder from scratch, creating a data-dense visual interface for configuring workflow triggers, actions, conditions, delays, webhooks, and workflow transitions using ReactFlow v11.",
+        "Engineered the dynamic workflow editor using ReactFlow v11 and Redux Toolkit, implementing configurable node creation, dynamic node insertion and reconnection, and synchronized node/edge state management.",
+        "Implemented a hybrid RSA–AES encryption layer to secure API communication, combining asymmetric key exchange with symmetric encryption for efficient payload protection.",
+        "Rebuilt the legacy application UI using React.js and Material UI (MUI), translating Figma designs into reusable, responsive components and establishing consistent UI patterns across the platform.",
+        "Worked closely with backend engineers to coordinate API contracts and data flows, integrate frontend functionality with backend services, and troubleshoot cross-layer issues to deliver features reliably.",
       ],
       stack: [
         "React.Js",
