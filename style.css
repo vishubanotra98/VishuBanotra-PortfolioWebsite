@@ -14,6 +14,16 @@
   --max-width: 1180px;
   --font-sans: "Geist", "Inter", system-ui, sans-serif;
   --font-display: "Space Grotesk", "Geist", system-ui, sans-serif;
+  /* Samurai slash motif — ~30% personality tier (visible but professional) */
+  --slash-moss: rgba(88, 125, 103, 0.28);
+  --slash-moss-soft: rgba(88, 125, 103, 0.2);
+  --slash-charcoal: rgba(35, 35, 33, 0.2);
+  --slash-line: rgba(24, 33, 31, 0.18);
+  --zoro-wash: rgba(88, 125, 103, 0.09);
+  --zoro-wash-strong: rgba(88, 125, 103, 0.12);
+  --section-y: clamp(44px, 3.6vw, 76px);
+  --section-y-tight: clamp(36px, 3vw, 64px);
+  --heading-gap: clamp(16px, 2.6vw, 30px);
 }
 
 * {
@@ -30,12 +40,88 @@ body {
   min-width: 320px;
   overflow-x: hidden;
   background:
+    repeating-linear-gradient(
+      -24deg,
+      transparent,
+      transparent 64px,
+      rgba(24, 33, 31, 0.028) 64px,
+      rgba(24, 33, 31, 0.028) 65px
+    ),
     linear-gradient(115deg, rgba(184, 171, 201, 0.1), transparent 34%),
-    linear-gradient(155deg, rgba(88, 125, 103, 0.08), transparent 42%),
+    linear-gradient(155deg, rgba(88, 125, 103, 0.12), transparent 46%),
     var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
+}
+
+/* Editorial slash atmosphere — fills blank vertical space without affecting layout */
+.editorial-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      122deg,
+      transparent 38%,
+      rgba(88, 125, 103, 0.11) 38.08%,
+      rgba(88, 125, 103, 0.11) 38.18%,
+      transparent 38.28%
+    ),
+    linear-gradient(
+      118deg,
+      transparent 62%,
+      rgba(35, 35, 33, 0.08) 62.1%,
+      rgba(35, 35, 33, 0.08) 62.2%,
+      transparent 62.3%
+    ),
+    linear-gradient(
+      134deg,
+      transparent 78%,
+      rgba(88, 125, 103, 0.1) 78.08%,
+      rgba(88, 125, 103, 0.1) 78.18%,
+      transparent 78.28%
+    );
+  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
+}
+
+.editorial-atmosphere::before,
+.editorial-atmosphere::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.editorial-atmosphere::before {
+  top: 68vh;
+  left: -6%;
+  width: min(360px, 52vw);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--slash-charcoal) 45%,
+    transparent
+  );
+  transform: rotate(8deg);
+  opacity: 0.22;
+}
+
+.editorial-atmosphere::after {
+  top: 155vh;
+  right: -4%;
+  width: min(280px, 40vw);
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    transparent,
+    var(--slash-moss-soft) 50%,
+    transparent
+  );
+  transform: rotate(-14deg);
+  opacity: 0.24;
 }
 
 body::selection {
@@ -84,6 +170,7 @@ a {
   top: 4%;
   right: -12%;
   background: var(--emerald);
+  opacity: 0.14;
 }
 
 .shape-two {
@@ -118,6 +205,7 @@ a {
 }
 
 .brand-mark {
+  position: relative;
   display: inline-grid;
   place-items: center;
   width: 42px;
@@ -128,6 +216,23 @@ a {
   font-family: var(--font-display);
   font-weight: 700;
   text-decoration: none;
+}
+
+/* Three-sword micro motif on logo (hidden signature) */
+.brand-mark::after {
+  position: absolute;
+  right: 6px;
+  bottom: 9px;
+  width: 1px;
+  height: 10px;
+  content: "";
+  background: rgba(108, 152, 118, 0.9);
+  box-shadow:
+    -4px 2px 0 0 rgba(108, 152, 118, 0.7),
+    -8px 4px 0 0 rgba(108, 152, 118, 0.5);
+  transform: rotate(-36deg);
+  transform-origin: bottom center;
+  pointer-events: none;
 }
 
 .nav-links {
@@ -146,6 +251,22 @@ a {
   text-decoration: none;
 }
 
+.nav-links a::before {
+  position: absolute;
+  left: 0;
+  bottom: -9px;
+  width: 18px;
+  height: 1px;
+  content: "";
+  background: var(--emerald);
+  opacity: 0;
+  transform: rotate(-22deg) translateX(-4px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+  pointer-events: none;
+}
+
 .nav-links a::after,
 .text-link::after,
 .site-footer a::after {
@@ -161,6 +282,11 @@ a {
   transition: transform 220ms ease;
 }
 
+.nav-links a:hover::before {
+  opacity: 0.75;
+  transform: rotate(-22deg) translateX(0);
+}
+
 .nav-links a:hover::after,
 .text-link:hover::after,
 .site-footer a:hover::after {
@@ -171,17 +297,154 @@ a {
 .section-shell {
   width: min(calc(100% - 32px), var(--max-width));
   margin: 0 auto;
-  padding: clamp(72px, 5vw, 132px) 0;
+  padding: var(--section-y) 0;
+}
+
+.section-shell + .section-shell {
+  padding-top: var(--section-y-tight);
 }
 
 .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: auto;
   display: grid;
   grid-template-columns: minmax(0, 1.14fr) minmax(300px, 0.58fr);
   align-items: center;
   gap: clamp(32px, 7vw, 96px);
-  padding-top: clamp(64px, 9vw, 118px);
-  padding-bottom: clamp(52px, 7vw, 86px);
+  padding-top: clamp(56px, 7.5vw, 96px);
+  padding-bottom: clamp(40px, 5vw, 68px);
+}
+
+/*
+ * Cinematic hero: full-bleed background image (Netflix-style) with cream fallbacks.
+ * Content stays aligned with other sections; image spans edge-to-edge in the hero only.
+ */
+.hero.section-shell {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: max(16px, calc((100vw - min(calc(100vw - 32px), var(--max-width))) / 2));
+}
+
+.hero::before {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  content: "";
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  background-color: var(--paper);
+  background-image: url("assets/ME.avif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Face/figure sits right; name column stays on open cream (left) */
+  background-position: 96% 42%;
+}
+
+.hero::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      var(--paper) 0%,
+      var(--paper) 22%,
+      rgba(245, 241, 233, 0.94) 30%,
+      rgba(245, 241, 233, 0.72) 40%,
+      rgba(245, 241, 233, 0.32) 50%,
+      rgba(245, 241, 233, 0.06) 60%,
+      transparent 70%
+    ),
+    linear-gradient(
+      125deg,
+      transparent 58%,
+      rgba(88, 125, 103, 0.06) 58.1%,
+      rgba(88, 125, 103, 0.06) 58.25%,
+      transparent 58.4%
+    ),
+    linear-gradient(
+      118deg,
+      transparent 64%,
+      rgba(88, 125, 103, 0.05) 64.08%,
+      rgba(88, 125, 103, 0.05) 64.2%,
+      transparent 64.32%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(245, 241, 233, 0.08) 0%,
+      transparent 36%,
+      rgba(245, 241, 233, 0.26) 78%,
+      var(--paper) 100%
+    );
+}
+
+.hero-copy::before {
+  position: absolute;
+  z-index: 0;
+  top: 4px;
+  right: 6%;
+  width: 1px;
+  height: 54px;
+  content: "";
+  pointer-events: none;
+  background: var(--slash-moss);
+  box-shadow:
+    8px 5px 0 0 var(--slash-moss-soft),
+    16px 10px 0 0 rgba(88, 125, 103, 0.14);
+  transform: rotate(-33deg);
+  opacity: 0.26;
+}
+
+.hero-copy,
+.hero-panel {
+  position: relative;
+  z-index: 1;
+}
+
+/* Localized scrim behind typography — readability without washing out artwork */
+.hero-copy::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  inset: -40px -20px -36px -56px;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 88% 80% at 8% 42%,
+    rgba(245, 241, 233, 0.94) 0%,
+    rgba(245, 241, 233, 0.72) 38%,
+    rgba(245, 241, 233, 0.18) 62%,
+    transparent 78%
+  );
+}
+
+.hero-copy h1 {
+  text-shadow:
+    0 0 36px rgba(245, 241, 233, 0.85),
+    0 1px 12px rgba(245, 241, 233, 0.45);
+}
+
+/* Hero three-sword signature (right field, behind panel) */
+.hero-panel::before {
+  position: absolute;
+  z-index: -1;
+  top: 6%;
+  right: -6%;
+  width: 1px;
+  height: 88px;
+  content: "";
+  pointer-events: none;
+  background: var(--slash-moss);
+  box-shadow:
+    10px 6px 0 0 var(--slash-moss-soft),
+    20px 12px 0 0 rgba(88, 125, 103, 0.14);
+  transform: rotate(-34deg);
+  opacity: 0.28;
 }
 
 .eyebrow,
@@ -247,6 +510,8 @@ h3 {
 }
 
 .button {
+  position: relative;
+  overflow: hidden;
   min-height: 48px;
   display: inline-flex;
   align-items: center;
@@ -261,11 +526,48 @@ h3 {
     transform 220ms ease,
     background 220ms ease,
     border-color 220ms ease,
-    color 220ms ease;
+    color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+/* Slash-inspired hover accent on buttons */
+.button::before {
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  bottom: 8px;
+  width: 1px;
+  content: "";
+  background: linear-gradient(
+    165deg,
+    transparent 8%,
+    rgba(88, 125, 103, 0.55) 48%,
+    transparent 92%
+  );
+  opacity: 0;
+  transform: skewX(-14deg) translateX(6px);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
 }
 
 .button:hover {
   transform: translateY(-2px);
+  box-shadow: 2px 10px 24px rgba(24, 33, 31, 0.08);
+}
+
+.button:hover::before {
+  opacity: 0.85;
+  transform: skewX(-14deg) translateX(-2px);
+}
+
+.button-primary::before {
+  background: linear-gradient(
+    165deg,
+    transparent 8%,
+    rgba(245, 241, 233, 0.45) 48%,
+    transparent 92%
+  );
 }
 
 .button svg,
@@ -369,10 +671,64 @@ h3 {
 }
 
 .split-section {
+  position: relative;
   display: grid;
   grid-template-columns: 0.9fr 1fr;
   gap: clamp(28px, 7vw, 92px);
   border-top: 1px solid var(--line);
+}
+
+/* About: diagonal slash entering from the left edge */
+#about.split-section {
+  padding-top: var(--section-y-tight);
+}
+
+#about.split-section::before {
+  position: absolute;
+  top: clamp(28px, 4vw, 52px);
+  left: -5%;
+  width: min(320px, 46vw);
+  height: 1px;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--slash-moss) 46%,
+    transparent 100%
+  );
+  transform: rotate(-13deg);
+  pointer-events: none;
+  opacity: 0.28;
+}
+
+#about.split-section::after {
+  position: absolute;
+  top: clamp(40px, 5vw, 64px);
+  left: 1%;
+  width: 88px;
+  height: 1px;
+  content: "";
+  background: var(--slash-charcoal);
+  transform: rotate(-31deg);
+  pointer-events: none;
+  opacity: 0.24;
+}
+
+#about.split-section .section-body::before {
+  position: absolute;
+  top: 12%;
+  right: -8%;
+  width: 140px;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(270deg, var(--slash-moss-soft), transparent);
+  transform: rotate(17deg);
+  opacity: 0.22;
+}
+
+#about .section-body {
+  position: relative;
 }
 
 .section-body p:last-child {
@@ -381,11 +737,49 @@ h3 {
 
 .section-heading {
   max-width: 780px;
-  margin-bottom: clamp(32px, 6vw, 58px);
+  margin-bottom: var(--heading-gap);
+}
+
+.project-heading {
+  margin-bottom: var(--heading-gap);
 }
 
 .section-kicker {
-  margin-bottom: 14px;
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 16px;
+}
+
+/* Thin diagonal accent beside section kickers */
+.section-kicker::before {
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 12px;
+  height: 1px;
+  content: "";
+  background: var(--emerald);
+  transform: rotate(-42deg);
+  transform-origin: left center;
+  opacity: 0.88;
+}
+
+.eyebrow {
+  position: relative;
+  padding-left: 16px;
+}
+
+.eyebrow::before {
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 12px;
+  height: 1px;
+  content: "";
+  background: var(--emerald);
+  transform: rotate(-42deg);
+  transform-origin: left center;
+  opacity: 0.88;
 }
 
 .skill-grid,
@@ -402,6 +796,8 @@ h3 {
 
 .skill-card,
 .project-card {
+  position: relative;
+  overflow: hidden;
   min-height: 100%;
   padding: 24px;
   border: 1px solid var(--line);
@@ -410,13 +806,95 @@ h3 {
   transition:
     transform 220ms ease,
     border-color 220ms ease,
-    background 220ms ease;
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+/* Moss-green top edge + diagonal hover accent on cards */
+.skill-card::before,
+.project-card::before {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    rgba(88, 125, 103, 0.75),
+    rgba(88, 125, 103, 0.08) 72%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.skill-card::after {
+  position: absolute;
+  top: 18px;
+  right: -28px;
+  width: 96px;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, var(--slash-moss-soft), transparent);
+  transform: rotate(-26deg);
+  opacity: 0.16;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.project-card::after {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 132px;
+  height: 132px;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(
+      225deg,
+      transparent 65%,
+      rgba(88, 125, 103, 0.2) 65.2%,
+      rgba(88, 125, 103, 0.2) 65.55%,
+      transparent 65.75%
+    ),
+    linear-gradient(
+      210deg,
+      transparent 72%,
+      rgba(35, 35, 33, 0.08) 72.15%,
+      rgba(35, 35, 33, 0.08) 72.35%,
+      transparent 72.5%
+    );
+  opacity: 0.58;
+  transition: opacity 180ms ease;
+}
+
+.project-card::before {
+  opacity: 0.42;
 }
 
 .skill-card:hover,
 .project-card:hover {
   border-color: rgba(88, 125, 103, 0.34);
   background: rgba(255, 252, 245, 0.78);
+  box-shadow: 0 14px 36px rgba(24, 33, 31, 0.06);
+}
+
+.skill-card:hover::before {
+  opacity: 1;
+}
+
+.skill-card:hover::after {
+  opacity: 0.18;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:hover::after {
+  opacity: 1;
 }
 
 .card-icon {
@@ -462,14 +940,23 @@ h3 {
   gap: 18px;
 }
 
+/* Timeline spine: slightly sharper, blade-like gradient */
 .timeline::before {
   position: absolute;
-  left: 120px;
+  left: 119px;
   top: 10px;
   bottom: 10px;
-  width: 1px;
+  width: 2px;
   content: "";
-  background: var(--line);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(88, 125, 103, 0.22) 6%,
+    rgba(35, 35, 33, 0.16) 50%,
+    rgba(88, 125, 103, 0.18) 94%,
+    transparent 100%
+  );
+  clip-path: polygon(0 0, 100% 3px, 100% 100%, 0 calc(100% - 3px));
 }
 
 .timeline-period {
@@ -486,6 +973,33 @@ h3 {
   padding: 0 0 30px;
 }
 
+.timeline-item::after {
+  position: absolute;
+  left: 88px;
+  top: 10px;
+  width: 52px;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--slash-moss), transparent);
+  transform: rotate(-19deg);
+  opacity: 0.12;
+  transition:
+    opacity 160ms ease,
+    width 160ms ease;
+}
+
+.timeline-item:nth-child(even)::after {
+  left: 92px;
+  transform: rotate(-31deg);
+  width: 44px;
+}
+
+.timeline-item:hover::after {
+  opacity: 0.3;
+  width: 72px;
+}
+
 .timeline-dot {
   position: absolute;
   left: 116px;
@@ -496,12 +1010,47 @@ h3 {
   border-radius: 50%;
   background: var(--emerald);
   box-shadow: 0 0 0 6px rgba(88, 125, 103, 0.14);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 8px rgba(88, 125, 103, 0.18);
 }
 
 .timeline-content {
+  position: relative;
   max-width: 760px;
-  padding-bottom: 28px;
+  padding-bottom: 22px;
   border-bottom: 1px solid var(--line);
+}
+
+.timeline-content::before {
+  position: absolute;
+  top: -6px;
+  left: -12px;
+  width: 28px;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: var(--slash-moss);
+  transform: rotate(-26deg);
+  opacity: 0.26;
+}
+
+.timeline-item:nth-child(odd) .timeline-content::after {
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 54px;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--slash-charcoal), transparent);
+  transform: rotate(-11deg);
+  opacity: 0.18;
 }
 
 .timeline-content p {
@@ -560,6 +1109,13 @@ h3 {
 .project-card {
   display: flex;
   flex-direction: column;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    0 100%
+  );
 }
 
 .project-meta {
@@ -601,17 +1157,92 @@ h3 {
 }
 
 .contact-section {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
   gap: clamp(28px, 7vw, 92px);
   align-items: center;
 }
 
+/* Contact: stronger (still minimal) three-line motif */
+#contact.contact-section {
+  padding-block: clamp(48px, 3.8vw, 80px);
+  background:
+    linear-gradient(165deg, rgba(35, 35, 33, 0.04) 0%, transparent 40%),
+    linear-gradient(90deg, transparent 48%, var(--zoro-wash) 100%),
+    linear-gradient(
+      128deg,
+      transparent 70%,
+      rgba(88, 125, 103, 0.06) 70.1%,
+      rgba(88, 125, 103, 0.06) 70.25%,
+      transparent 70.4%
+    );
+}
+
+.contact-section::before {
+  position: absolute;
+  z-index: 0;
+  top: 10%;
+  left: -1%;
+  width: 1px;
+  height: 104px;
+  content: "";
+  pointer-events: none;
+  background: rgba(88, 125, 103, 0.22);
+  box-shadow:
+    12px 7px 0 0 rgba(88, 125, 103, 0.17),
+    24px 14px 0 0 rgba(88, 125, 103, 0.12);
+  transform: rotate(-33deg);
+  opacity: 0.32;
+}
+
+.contact-section::after {
+  position: absolute;
+  z-index: 0;
+  bottom: 12%;
+  right: -4%;
+  width: min(260px, 36vw);
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    270deg,
+    transparent,
+    var(--slash-moss) 52%,
+    transparent
+  );
+  transform: rotate(12deg);
+  opacity: 0.26;
+}
+
+.contact-copy::after {
+  position: absolute;
+  top: 8px;
+  right: -12%;
+  width: 1px;
+  height: 56px;
+  content: "";
+  pointer-events: none;
+  background: rgba(88, 125, 103, 0.16);
+  box-shadow:
+    8px 5px 0 0 rgba(88, 125, 103, 0.12),
+    16px 10px 0 0 rgba(88, 125, 103, 0.09);
+  transform: rotate(-38deg);
+  opacity: 0.28;
+}
+
 .contact-copy p {
   margin-top: 24px;
 }
 
+.contact-copy,
 .contact-card {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-card {
+  position: relative;
   display: grid;
   gap: 10px;
   padding: 18px;
@@ -620,6 +1251,21 @@ h3 {
   background: var(--charcoal);
   color: var(--paper-soft);
   box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.contact-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    transparent 68%,
+    rgba(88, 125, 103, 0.12) 68.15%,
+    rgba(88, 125, 103, 0.12) 68.35%,
+    transparent 68.5%
+  );
 }
 
 .contact-card a,
@@ -648,6 +1294,7 @@ h3 {
 }
 
 .site-footer {
+  position: relative;
   width: min(calc(100% - 32px), var(--max-width));
   margin: 0 auto;
   padding: 28px 0 40px;
@@ -657,6 +1304,24 @@ h3 {
   border-top: 1px solid var(--line);
   color: var(--ink-soft);
   font-size: 0.94rem;
+}
+
+.site-footer::before {
+  position: absolute;
+  top: 0;
+  right: 22%;
+  width: 120px;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--slash-moss-soft) 50%,
+    transparent
+  );
+  transform: rotate(-18deg);
+  opacity: 0.22;
 }
 
 .site-footer a {
@@ -723,7 +1388,20 @@ h3 {
 
   .section-shell {
     width: min(calc(100% - 28px), var(--max-width));
-    padding: 72px 0;
+    padding: var(--section-y) 0;
+  }
+
+  .editorial-atmosphere::before,
+  .editorial-atmosphere::after {
+    opacity: 0.14;
+  }
+
+  .hero-panel::before {
+    opacity: 0.2;
+  }
+
+  .hero-copy::before {
+    opacity: 0.18;
   }
 
   .hero,
@@ -737,8 +1415,44 @@ h3 {
     padding-top: 78px;
   }
 
+  /* Tablet: keep artwork visible; protect copy with gradients only */
+  .hero::before {
+    background-position: 88% 36%;
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(
+        90deg,
+        var(--paper) 0%,
+        var(--paper) 32%,
+        rgba(245, 241, 233, 0.94) 42%,
+        rgba(245, 241, 233, 0.62) 54%,
+        rgba(245, 241, 233, 0.14) 68%,
+        transparent 82%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(245, 241, 233, 0.12) 0%,
+        transparent 40%,
+        rgba(245, 241, 233, 0.38) 84%,
+        var(--paper) 100%
+      );
+  }
+
+  .hero-copy::after {
+    inset: -28px -12px -28px -32px;
+    background: radial-gradient(
+      ellipse 92% 85% at 6% 40%,
+      rgba(245, 241, 233, 0.97) 0%,
+      rgba(245, 241, 233, 0.78) 42%,
+      transparent 72%
+    );
+  }
+
   .hero-panel {
     max-width: 620px;
+    background: rgba(255, 252, 245, 0.88);
   }
 
   .signature-card {
@@ -757,6 +1471,61 @@ h3 {
 }
 
 @media (max-width: 640px) {
+  .hero::before {
+    background-position: 92% 28%;
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(
+        90deg,
+        var(--paper) 0%,
+        var(--paper) 38%,
+        rgba(245, 241, 233, 0.92) 48%,
+        rgba(245, 241, 233, 0.48) 62%,
+        rgba(245, 241, 233, 0.1) 78%,
+        transparent 92%
+      ),
+      linear-gradient(to bottom, transparent 48%, var(--paper) 100%);
+  }
+
+  .hero-panel::before,
+  .hero-copy::before,
+  main::before,
+  main::after,
+  #skills.section-shell::before,
+  #projects.section-shell::before,
+  #about.split-section::after,
+  #about .section-body::before,
+  .skill-card::after {
+    display: none;
+  }
+
+  .editorial-atmosphere {
+    opacity: 0.55;
+  }
+
+  #projects.section-shell {
+    background:
+      linear-gradient(180deg, var(--zoro-wash) 0%, transparent 26%),
+      repeating-linear-gradient(
+        -18deg,
+        transparent,
+        transparent 56px,
+        rgba(24, 33, 31, 0.028) 56px,
+        rgba(24, 33, 31, 0.028) 57px
+      );
+  }
+
+  .contact-section::before {
+    opacity: 0.24;
+    height: 68px;
+  }
+
+  .timeline-item::after {
+    opacity: 0.08;
+  }
+
   h1 {
     font-size: clamp(2.85rem, 14vw, 3.95rem);
     line-height: 1;
@@ -910,15 +1679,229 @@ h3 {
 }
 
 .github-section {
-  padding-bottom: 70px;
+  position: relative;
+  padding-bottom: 44px;
+}
+
+/* GitHub: faint background slash (structure unchanged) */
+.github-section::before {
+  position: absolute;
+  top: clamp(40px, 5vw, 64px);
+  left: -3%;
+  width: min(340px, 48vw);
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--slash-line) 42%,
+    transparent 100%
+  );
+  transform: rotate(11deg);
+  opacity: 0.22;
+}
+
+.github-section::after {
+  position: absolute;
+  bottom: 22%;
+  right: -4%;
+  width: 96px;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: var(--slash-moss-soft);
+  transform: rotate(-27deg);
+  opacity: 0.2;
+}
+
+/*
+ * Asymmetric ambient slash lines
+ */
+main {
+  position: relative;
+  overflow-x: clip;
+}
+
+main::before,
+main::after {
+  position: absolute;
+  z-index: 0;
+  width: min(38vw, 480px);
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--slash-charcoal) 46%,
+    var(--slash-moss-soft) 54%,
+    transparent
+  );
+}
+
+main::before {
+  top: 42vh;
+  right: -8%;
+  transform: rotate(-29deg);
+  opacity: 0.2;
+}
+
+main::after {
+  top: 132vh;
+  left: -10%;
+  width: min(44vw, 540px);
+  transform: rotate(11deg);
+  opacity: 0.17;
+}
+
+main > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Skills: three-line motif in background (behind cards) */
+#skills.section-shell {
+  position: relative;
+  background: radial-gradient(
+    ellipse 80% 55% at 100% 20%,
+    var(--zoro-wash-strong),
+    transparent 70%
+  );
+}
+
+#skills.section-shell::before {
+  position: absolute;
+  z-index: 0;
+  top: 18%;
+  right: -2%;
+  width: 1px;
+  height: 88px;
+  content: "";
+  pointer-events: none;
+  background: var(--slash-moss-soft);
+  box-shadow:
+    10px 6px 0 0 rgba(88, 125, 103, 0.12),
+    20px 12px 0 0 rgba(88, 125, 103, 0.09);
+  transform: rotate(-36deg);
+  opacity: 0.26;
+}
+
+#skills.section-shell::after {
+  position: absolute;
+  z-index: 0;
+  bottom: 8%;
+  left: -6%;
+  width: min(220px, 32vw);
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--slash-line), transparent);
+  transform: rotate(-9deg);
+  opacity: 0.22;
+}
+
+#skills .skill-grid {
+  position: relative;
+  z-index: 1;
+}
+
+#experience.section-shell {
+  position: relative;
+}
+
+#experience.section-shell::after {
+  position: absolute;
+  top: clamp(52px, 6vw, 76px);
+  left: 4%;
+  width: 110px;
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--slash-moss), transparent);
+  transform: rotate(-21deg);
+  opacity: 0.22;
+}
+
+/*
+ * Projects — second visual anchor after hero (full-bleed wash, editorial lines).
+ */
+#projects.section-shell {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: max(
+    16px,
+    calc((100vw - min(calc(100vw - 32px), var(--max-width))) / 2)
+  );
+  padding-block: clamp(52px, 4.2vw, 88px);
+  background:
+    linear-gradient(180deg, var(--zoro-wash-strong) 0%, transparent 32%),
+    linear-gradient(118deg, rgba(35, 35, 33, 0.04) 0%, transparent 40%),
+    repeating-linear-gradient(
+      -18deg,
+      transparent,
+      transparent 56px,
+      rgba(24, 33, 31, 0.034) 56px,
+      rgba(24, 33, 31, 0.034) 57px
+    );
+}
+
+#projects .section-heading,
+#projects .project-grid {
+  width: min(calc(100% - 32px), var(--max-width));
+  margin-inline: auto;
+}
+
+#projects.section-shell::before {
+  position: absolute;
+  z-index: 0;
+  top: clamp(36px, 4vw, 56px);
+  right: 8%;
+  width: 1px;
+  height: 82px;
+  content: "";
+  pointer-events: none;
+  background: rgba(88, 125, 103, 0.2);
+  box-shadow:
+    9px 5px 0 0 rgba(88, 125, 103, 0.15),
+    18px 10px 0 0 rgba(88, 125, 103, 0.11);
+  transform: rotate(-38deg);
+  opacity: 0.32;
+}
+
+#projects.section-shell::after {
+  position: absolute;
+  z-index: 0;
+  top: 42%;
+  left: -6%;
+  width: min(280px, 38vw);
+  height: 1px;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--slash-moss) 54%,
+    transparent
+  );
+  transform: rotate(6deg);
+  opacity: 0.24;
+}
+
+#projects .project-grid {
+  position: relative;
+  z-index: 1;
 }
 
 .github-section .section-heading {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .github-section + .section-shell {
-  padding-top: 56px;
+  padding-top: var(--section-y-tight);
 }
 
 @media (max-width: 899px) {
